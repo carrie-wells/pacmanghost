@@ -1,0 +1,87 @@
+<html>
+<SCRIPT>
+var ghostPos = 0;
+let pageWidth = window.innerWidth;
+const ghostArray = [
+        ['Ghost1.png', 'Ghost2.png'],
+        ['Ghost2.png', 'Ghost1.png']
+    ];
+var ghostDirection = 0;
+var ghostFocus = 0;
+
+function runGhost() {
+  let img = document.getElementById("Ghost");
+  let imgWidth = img.width;
+  ghostFocus = (ghostFocus + 1) % 2;
+  ghostDirection = checkPageBounds(ghostDirection, imgWidth, ghostPos, pageWidth);
+  img.src = ghostArray[ghostDirection][ghostFocus];
+  if (ghostDirection) {
+    ghostPos -= 20;
+    img.style.left = ghostPos + "px";
+  } else {
+    ghostPos += 20;
+    img.style.left = ghostPos + "px";
+  }
+}
+setInterval(runGhost, 200);
+
+function checkPageBounds(direction, imgWidth, pos, pageWidth) {
+  if (direction == 0 && pos + imgWidth > pageWidth) direction = 1;
+  if (direction == 1 && pos < 0) direction = 0;
+
+  return direction;
+}
+
+</SCRIPT>
+
+<body>
+    <img id="Ghost" src="Ghost1.png" width='200' style="position:absolute"> </img>
+    <style>
+      body {
+        background-image: url('dots.png');
+        background-repeat: repeat-x;
+      }
+      </style>
+        <body style="background-color:#000000;"></body>
+  </body>
+
+<SCRIPT>
+
+var pacPos = 400;
+const pacArray = [
+        ['PacMan1.png', 'PacMan2.png'],
+        ['PacMan3.png', 'PacMan4.png']
+    ];
+var pacDirection = 0;
+var pacFocus = 0;
+
+function runPac() {
+  let img = document.getElementById("PacMan");
+  let imgWidth = img.width;
+  pacFocus = (pacFocus + 1) % 2;
+  pacDirection = checkPageBounds(pacDirection, imgWidth, pacPos, pageWidth);
+  img.src = pacArray[pacDirection][pacFocus];
+  if (pacDirection) {
+    pacPos -= 20;
+    img.style.left = pacPos + "px";
+  } else {
+    pacPos += 20;
+    img.style.left = pacPos + "px";
+  }
+}
+setInterval(runPac, 200);
+
+function checkPageBounds(direction, imgWidth, pos, pageWidth) {
+  if (direction == 0 && pos + imgWidth > pageWidth) direction = 1;
+  if (direction == 1 && pos < 0) direction = 0;
+
+  return direction;
+}
+
+</SCRIPT>
+
+<body>
+    <img id="PacMan" src="PacMan1.png" width='200' style="position:absolute"> </img>
+</body>
+
+</html>
